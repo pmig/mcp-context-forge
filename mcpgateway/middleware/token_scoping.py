@@ -66,7 +66,7 @@ class TokenScopingMiddleware:
         try:
             # Decode JWT with signature verification but skip audience/issuer checks for scope extraction
             # (full verification including audience/issuer is handled by the auth system)
-            payload = jwt.decode(token, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm], options={"verify_aud": False, "verify_iss": False})
+            payload = jwt.decode(token, settings.jwt_public_key, algorithms=[settings.jwt_algorithm], options={"verify_aud": False, "verify_iss": False})
             return payload.get("scopes")
         except jwt.PyJWTError:
             return None

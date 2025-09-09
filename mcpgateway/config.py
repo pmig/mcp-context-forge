@@ -163,10 +163,46 @@ class Settings(BaseSettings):
     # Authentication
     basic_auth_user: str = "admin"
     basic_auth_password: str = "changeme"
-    jwt_secret_key: str = "my-test-key"
-    jwt_algorithm: str = "HS256"
-    jwt_audience: str = "mcpgateway-api"
-    jwt_issuer: str = "mcpgateway"
+    jwt_secret_key: str = """-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAtzz3SgY7WxlqmUBjNGtWkgKEj8ZuEoz/JZxjI6LorXnOuOr3
+6f20Guvk5Xeo7zLahQVoeMSuZnlxeVwuDHEnu05jke8fLE/HSmS5oaPrx1TcaXZS
+GJt4+oJ4MVOJBQi1ON9LPMxjuzr77BPQHg06Y3QPrI6W6+5hklhctxsv6c5AbW0y
+tc7wSw4GekIVi+t0HIuoVbuSfVl6XyWffln4zff92/rbpJf8xOQzemXyTB7dju1m
+fVEBmymzzNGzyemYvnzuhgF1U30UEZ5M8xiOgBbvltBkIWqMsuQEZCjcUlNgEpiG
+17+b/dQZKECntIzl+LAEPqi1gGXhl0HdvqvQRQIDAQABAoIBAEWKda86PjyMoNAY
+h43VTr2LBxQpkoynxg1YFKfpo7RyjenQAtZi2n99FxmfGBXvjs79BnEO88EgRdhx
+C2jdaN7FGTTBM2t1u4SYRXr64vh7VEsSBIYiOv+XlFXkBhRLAbvbwooIZ7Ee6Yzm
+2A0PqCEmYuxyEQTpK06HCmjTgJOSdjvgoZrh8P8IDAlge+bmjw1I6qQ/rx5J03nY
+hpLKZ+0tZAToBUGqClL/gF/3IOdtM7EICUqhvVw3MVAiZgl7YEYnWkUXhZbo0eIL
+DOeOQA14++WOuZcQGXVpjq4hpOsKSc/fpCYO3bAh5Ax7aCRloow/u0oNOBmhmsvS
+HlBddeECgYEAyVh5X0s1Zcn+yxCmAJb6yMIDOcKS5FKl4VdoRFnb/W8hwm91rvWA
+EuQfHVIICAjArphaUVDuEmXV+z/WLw5NljyruO2AP3IRnRWsqzzdhgsgM999+mKr
+xZv4g1n+nCQ9qkiqfBfOqA7+73Ql6s5gUwBi6kY9kxp8+clTZj5N+BsCgYEA6Poz
+/vBeTCla31cJS3knxuYFGQ0VNoubnkMmLCx4G5H/ozumaxTf9mymQY6j5YCRNAET
+bej/9bv9swpu0MbLF1Li6I+C1Gd8/tF8t6uTeNCZbRhLF+uan9aUglxBmrUiGAAD
+aM67T1eoaIwCe1tzkDu3KYO8N/vBAa+pXDiGnx8CgYAgTGoD6FujfXi6+Gu4sn9+
+TukXjefkaoGjmVLnjAanK/mdaCXXsBggb6myGWOibk0CdPwgCTx3hRCDYmUoXUIC
+9K6TVr3474J10XFGctgSVZyP1a0uyj9FztRZtckLISEnPMrkZylGeklY/ifK99op
+1mkHrcbY3ynnI+2V/C6juwKBgDfs99ZW9QvrUXkTd5O6faXtSYP98/2n/a88B0nL
+UvmrTmZsx0IlPK323uIVz5okBrcpGvTjXa4rdncoJfnP/qiWqQmSiaFbRlIVD483
+jKsPyAS8NCqF0BRWekfgxY7RtGF2f1sFZUlijXarRV0/Urpo20sH6IK32FkDRfBx
+UT+ZAoGAQjpbjqQxYAf9N3cUQbfBHEaUMTziuKD8Q/rbfp3Tzs/4v8HE1qVUc5Br
+mp+yUT4ZYslPwS7G4oy/iGq8yY1S9Vb+dEmO8qdkjUjMbwsMYlKroo5WHZD48eB/
+lboJY0fI1nsEQQj4CvZrmUeR2zm4sSpGmkRGmHdogVihNG4RDXc=
+-----END RSA PRIVATE KEY-----"""
+    jwt_public_key: str = """-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtzz3SgY7WxlqmUBjNGtW
+kgKEj8ZuEoz/JZxjI6LorXnOuOr36f20Guvk5Xeo7zLahQVoeMSuZnlxeVwuDHEn
+u05jke8fLE/HSmS5oaPrx1TcaXZSGJt4+oJ4MVOJBQi1ON9LPMxjuzr77BPQHg06
+Y3QPrI6W6+5hklhctxsv6c5AbW0ytc7wSw4GekIVi+t0HIuoVbuSfVl6XyWffln4
+zff92/rbpJf8xOQzemXyTB7dju1mfVEBmymzzNGzyemYvnzuhgF1U30UEZ5M8xiO
+gBbvltBkIWqMsuQEZCjcUlNgEpiG17+b/dQZKECntIzl+LAEPqi1gGXhl0HdvqvQ
+RQIDAQAB
+-----END PUBLIC KEY-----
+    """
+    jwt_algorithm: str = "RS256"
+    jwt_audience: str = "JRKETZQLRBELYNGI5M3CUUNAL5"
+    jwt_issuer: str = "http://localhost:5556"
     auth_required: bool = True
     token_expiry: int = 10080  # minutes
 

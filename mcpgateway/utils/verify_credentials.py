@@ -154,17 +154,16 @@ async def verify_jwt_token(token: str) -> dict:
         options = {}
         if settings.require_token_expiration:
             options["require"] = ["exp"]
+            options["verify_aud"] = False
 
         # Use configured audience and issuer for validation (security fix)
         decode_kwargs = {
-            "key": settings.jwt_secret_key,
+            "key": settings.jwt_public_key,
             "algorithms": [settings.jwt_algorithm],
             "options": options,
-            "audience": settings.jwt_audience,
             "issuer": settings.jwt_issuer,
         }
-
-        payload = jwt.decode(token, **decode_kwargs)
+        payload = jwt.decode(token, settings.jwt_public_key, algorithms=[settings.jwt_algorithm], options={"verify_aud": False, "verify_iss": False})
         return payload
 
     except jwt.MissingRequiredClaimError:

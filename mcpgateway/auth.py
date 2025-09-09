@@ -75,7 +75,7 @@ async def get_current_user(credentials: Optional[HTTPAuthorizationCredentials] =
     try:
         # Try JWT token first
         logger.debug("Attempting JWT token validation")
-        payload = jwt.decode(credentials.credentials, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm], audience=settings.jwt_audience, issuer=settings.jwt_issuer)
+        payload = jwt.decode(credentials.credentials, settings.jwt_public_key, algorithms=[settings.jwt_algorithm], audience=settings.jwt_audience, issuer=settings.jwt_issuer)
 
         logger.debug("JWT token validated successfully")
         # Extract user identifier (support both new and legacy token formats)

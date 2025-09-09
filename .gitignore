@@ -22,7 +22,6 @@ mcp.pstats
 .depsorter_cache.json
 .depupdate.*
 token.txt
-*.db
 *.bak
 *.backup
 mcpgateway.sbom.xml
@@ -56,7 +55,6 @@ reports/
 corpus/
 tests/fuzz/fuzzers/results/
 .venv
-mcp.db
 public/
 ica_integrations_host.sbom.json
 .pyre
