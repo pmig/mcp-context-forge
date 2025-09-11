@@ -35,7 +35,6 @@ import uuid
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, StreamingResponse
 import httpx
-import jwt
 from pydantic import ValidationError
 from pydantic_core import ValidationError as CoreValidationError
 from sqlalchemy.exc import IntegrityError
@@ -47,6 +46,7 @@ from mcpgateway.db import get_db, GlobalConfig
 from mcpgateway.db import Tool as DbTool
 from mcpgateway.middleware.rbac import get_current_user_with_permissions, require_permission
 from mcpgateway.models import LogLevel
+from mcpgateway.utils.create_jwt_token import create_jwt_token
 from mcpgateway.schemas import (
     A2AAgentCreate,
     GatewayCreate,
@@ -1890,7 +1890,8 @@ async def admin_ui(
                 "scopes": {"server_id": None, "permissions": ["*"], "ip_restrictions": [], "time_restrictions": {}},
             }
 
-            token = jwt.encode(payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm)
+            # Generate token using centralized token creation
+            token = await create_jwt_token(payload)
 
             # Set HTTP-only cookie for security
             response.set_cookie(
@@ -2027,7 +2028,7 @@ async def admin_login_handler(request: Request, db: Session = Depends(get_db)) -
             # First-Party
             from mcpgateway.routers.email_auth import create_access_token  # pylint: disable=import-outside-toplevel
 
-            token, _ = create_access_token(user)  # expires_seconds not needed here
+            token, _ = await create_access_token(user)  # expires_seconds not needed here
 
             # Create redirect response
             root_path = request.scope.get("root_path", "")
